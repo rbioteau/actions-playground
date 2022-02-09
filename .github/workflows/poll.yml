@@ -12,7 +12,9 @@ jobs:
           fetch-depth: '0'
       - name: List branches
         shell: bash
-        run: echo "##[set-output name=branches;]$(git branch '--format=%(refname:lstrip=2)')"
+        run: | 
+          git branch --format=%(refname:lstrip=2)
+          echo "##[set-output name=branches;]$(git branch --format=%(refname:lstrip=2))"
         id: extract_branches
       - name: Echo result
         run: |
