@@ -5,6 +5,8 @@ on:
 jobs:
   list-branches:
     runs-on: ubuntu-20.04
+    outputs:
+      branches: ${{ steps.extract_branches.outputs.branches }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -23,6 +25,6 @@ jobs:
     steps:
       - name: Echo result
         run: |
-          echo ${{ list-branches.steps.extract_branches.outputs.branches }}
+          echo ${{ needs.list-branches.outputs.branches }}
     
           
