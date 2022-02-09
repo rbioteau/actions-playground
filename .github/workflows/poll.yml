@@ -1,0 +1,13 @@
+name: Test list branch
+on:
+  workflow_dispatch:
+  
+jobs:
+  list-branches:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: List branches
+        run: |
+          git branch
