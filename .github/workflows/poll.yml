@@ -12,13 +12,17 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Install jq and jo
+        run: |
+          sudo apt-get update
+          sudo apt-get install jq jo
       - name: List branches
         shell: bash
         run: | 
           git remote set-branches origin '*'
           git fetch
-          branches=$(git branch --remote --format='%(refname:lstrip=3)' | tr '\n' ',')
-          echo "##[set-output name=branches;]${branches::-1}"
+          readarray branches <<< $(git branch --remote --format='%(refname:lstrip=3)' | tr '\n' ' ' | awk '{$1=$1};1')
+          echo "##[set-output name=branches;]$(jo -a $branches)"
         id: extract_branches
   show-branches:
     runs-on: ubuntu-20.04
