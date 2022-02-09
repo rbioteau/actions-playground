@@ -18,7 +18,11 @@ jobs:
           branches=$(git branch --remote --format='%(refname:lstrip=3)' | tr '\n' ',')
           echo "##[set-output name=branches;]${branches::-1}"
         id: extract_branches
+  show-branches:
+    runs-on: ubuntu-20.04
+    steps:
       - name: Echo result
         run: |
-          echo ${{ steps.extract_branches.outputs.branches }}
+          echo ${{ list-branches.steps.extract_branches.outputs.branches }}
+    
           
