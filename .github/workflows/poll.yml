@@ -27,9 +27,12 @@ jobs:
   show-branches:
     runs-on: ubuntu-20.04
     needs: list-branches
+    strategy:
+      matrix:
+        branch: ${{ fromJSON(needs.list-branches.outputs.branches) }}
     steps:
       - name: Echo result
         run: |
-          echo ${{ needs.list-branches.outputs.branches }}
+          echo ${{  matrix.branch }}
     
           
