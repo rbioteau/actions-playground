@@ -22,7 +22,8 @@ jobs:
           git remote set-branches origin '*'
           git fetch
           readarray branches <<< $(git branch --remote --format='%(refname:lstrip=3)' | tr '\n' ' ' | awk '{$1=$1};1')
-          echo "##[set-output name=branches;]$(jo -a $branches)"
+          json=$(jo -a $branches)
+          echo "##[set-output name=branches;]$(echo $json | jq -c 'map(select(test("^main$|release-*")))')"
         id: extract_branches
   show-branches:
     runs-on: ubuntu-20.04
