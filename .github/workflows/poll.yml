@@ -23,7 +23,7 @@ jobs:
           git fetch
           readarray branches <<< $(git branch --remote --format='%(refname:lstrip=3)' | tr '\n' ' ' | awk '{$1=$1};1')
           json=$(jo -a $branches)
-          echo "##[set-output name=branches;]$(echo $json | jq -c 'map(select(test("^main$|release-*")))')"
+          echo "##[set-output name=branches;]$(echo $json | jq -c 'map(select(test("^main$|release-.*")))')"
         id: extract_branches
   show-branches:
     runs-on: ubuntu-20.04
