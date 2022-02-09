@@ -9,12 +9,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: '0'
+          fetch-depth: 0
       - name: List branches
         shell: bash
         run: | 
           git branch --format='%(refname:lstrip=2)'
-          echo "##[set-output name=branches;]$(git branch --format='%(refname:lstrip=2')"
+          echo "##[set-output name=branches;]$(git branch --format='%(refname:lstrip=2)'"
         id: extract_branches
       - name: Echo result
         run: |
