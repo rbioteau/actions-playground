@@ -15,7 +15,7 @@ jobs:
         run: | 
           git remote set-branches origin '*'
           git fetch
-          branches=$(git branch --remote --format='%(refname:short)' | tr '\n' ',')
+          branches=$(git branch --remote --format='%(refname:lstrip=3)' | tr '\n' ',')
           echo "##[set-output name=branches;]${branches::-1}"
         id: extract_branches
       - name: Echo result
