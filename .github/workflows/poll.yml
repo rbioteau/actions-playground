@@ -9,6 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          ref: '*'
           fetch-depth: 0
       - name: List branches
         shell: bash
