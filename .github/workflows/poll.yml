@@ -13,8 +13,8 @@ jobs:
       - name: List branches
         shell: bash
         run: | 
-          git branch --format='%(refname:lstrip=2)'
-          echo "##[set-output name=branches;]$(git branch --format='%(refname:lstrip=2)'"
+          branches=$(git branch --format='%(refname:short)' | tr '\n' ',')
+          echo "##[set-output name=branches;]${branches::-1}"
         id: extract_branches
       - name: Echo result
         run: |
