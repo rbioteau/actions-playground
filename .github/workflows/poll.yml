@@ -9,5 +9,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: List branches
+        shell: bash
+        run: echo "##[set-output name=branches;]$(git branch '--format=%(refname:lstrip=2)')"
+        id: extract_branches
+      - name: Echo result
         run: |
-          git branch
+          echo ${{ steps.extract_branches.outputs.branches }}
+          
