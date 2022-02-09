@@ -9,14 +9,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: '*'
           fetch-depth: 0
       - name: List branches
         shell: bash
         run: | 
           git remote set-branches origin '*'
           git fetch
-          branches=$(git branch --list --format='%(refname:short)' | tr '\n' ',')
+          branches=$(git for-each-ref --format='%(refname:short)' | tr '\n' ',')
           echo "##[set-output name=branches;]${branches::-1}"
         id: extract_branches
       - name: Echo result
